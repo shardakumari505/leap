@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bg-rgba-blue {
+    background-color: rgba(36, 24, 72, 1);
+  }
+  .text-rgba-white{
+    color: rgba(255, 255, 255, 1);
+
+  }
+  .text-rgba-light-blue{
+    color: rgba(51, 46, 191, 1)
+  }
+  .text-rgba-tab-gray{
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .text-rgba-gray{
+    color:rgba(28, 28, 28, 1)
+  }
+  .text-rgba-green{
+    color:rgba(122, 220, 161, 1)
+  }
+  .bg-rgba-white{
+    background-color: rgba(255, 255, 255, 1)
+  }
+  .bg-rgba-gray{
+    background-color: rgba(204, 204, 204, 0.3)
+  }
+  .bullet-rgba-green{
+    background-color:rgba(69, 139, 136, 1)
+  }
+}
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
+
+
+

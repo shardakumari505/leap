@@ -6,12 +6,36 @@
   .bg-rgba-blue {
     background-color: rgba(36, 24, 72, 1);
   }
+  .text-rgba-black{
+    color: rgba(0, 0, 0, 1);
+  }
   .text-rgba-white{
     color: rgba(255, 255, 255, 1);
+  }
 
+  .text-rgba-dark-blue{
+    color:#1a1e27
+  }
+
+  .text-rgba-shade-gray{
+    color: rgba(73, 73, 73, 1);
+
+  }
+  .text-rgba-shade-lighter-gray{
+    color: rgba(104, 104, 104, 1);
+  }
+
+  .text-rgba-overflow-gray{
+    color:rgba(196, 196, 196, 1)
   }
   .text-rgba-light-blue{
     color: rgba(51, 46, 191, 1)
+  }
+  .text-rgba-dark-blue{
+    color:rgba(23, 21, 77, 1);
+  }
+  .text-rgba-blue-shade{
+    color: rgba(73, 54, 193, 1)
   }
   .text-rgba-tab-gray{
     color: rgba(255, 255, 255, 0.7);
@@ -22,8 +46,20 @@
   .text-rgba-green{
     color:rgba(122, 220, 161, 1)
   }
+  .text-rgba-dark-green{
+    color:rgba(44, 121, 56, 1);
+
+  }
   .bg-rgba-white{
     background-color: rgba(255, 255, 255, 1)
+  }
+  .bg-rgba-off-blue{
+    background-color: rgba(248, 248, 255, 1);
+
+  }
+  .bg-rgba-off-white-green{
+    background-color:rgba(245, 255, 247, 1);
+
   }
   .bg-rgba-gray{
     background-color: rgba(204, 204, 204, 0.3)
@@ -31,37 +67,13 @@
   .bullet-rgba-green{
     background-color:rgba(69, 139, 136, 1)
   }
-}
-
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  .button-rgba-blue{
+    background-color: rgba(68, 62, 255, 1);
+  }
+  .button-text-rgba-blue{
+    color:rgba(68, 62, 255, 1)
+  }
+  .border-bottom-custom {
+    border-bottom : 0.0625rem solid rgba(0, 0, 0, .07);
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
-
-
-

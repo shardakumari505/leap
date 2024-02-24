@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { usePathname } from 'next/navigation';
 import { styled } from '@mui/material/styles';
 
 const inter = Inter({ subsets: ["latin"] });

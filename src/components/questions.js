@@ -1,11 +1,6 @@
 import * as React from 'react';
 import 'tailwindcss/tailwind.css';
 import '../app/globals.css';
-import { Layout } from "../app/layout";
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import Image from 'next/image';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function Questions() {
@@ -20,7 +15,7 @@ function Questions() {
 
     return (
         <div className='w-full flex flex-col items-center align-middle justify-center mx-auto mt-16 bg-rgba-off-blue'>
-            <div className='font-bold text-3xl mt-8 text-rgba-dark-blue'>Got questions? Let's connect!</div>
+            <div className="font-bold text-3xl mt-8 text-rgba-dark-blue">Got questions? Let&apos;s connect!</div>
             <div className='w-4/5 flex flex-col h-fit mb-16 mt-8'>
                 {questions.map((question) => (
                     <div key={question.id} className='w-full m-1 flex justify-between py-5 pb-5 px-5 rounded items-center bg-rgba-white border-bottom-custom'>
@@ -33,10 +28,5 @@ function Questions() {
     );
 }
 
-Questions.getLayout = (page) => (
-    <Layout>
-        {page}
-    </Layout>
-);
 
 export default Questions;

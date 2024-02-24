@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
-
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { styled } from '@mui/material/styles';
 import Dropdown from 'react-dropdown';
@@ -10,7 +9,6 @@ import 'react-dropdown/style.css';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
-import { Layout } from "../app/layout";
 import 'tailwindcss/tailwind.css';
 import '../app/globals.css';
 
@@ -289,10 +287,5 @@ const Form = () => {
     );
 };
 
-Form.getLayout = (page) => (
-    <Layout>
-        {page}
-    </Layout>
-);
 
 export default Form;

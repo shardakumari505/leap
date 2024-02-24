@@ -1,11 +1,7 @@
 import * as React from 'react';
 import 'tailwindcss/tailwind.css';
 import '../app/globals.css';
-import { Layout } from "../app/layout";
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
-import Image from 'next/image';
 
 function Feedback() {
     const feedbacks = [
@@ -32,10 +28,5 @@ function Feedback() {
     );
 }
 
-Feedback.getLayout = (page) => (
-    <Layout>
-        {page}
-    </Layout>
-);
 
 export default Feedback;

@@ -1,10 +1,7 @@
 import * as React from 'react';
 import 'tailwindcss/tailwind.css';
 import '../app/globals.css';
-import { Layout } from "../app/layout";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
 import Image from 'next/image';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 
@@ -123,10 +120,5 @@ function Top() {
     );
 }
 
-Top.getLayout = (page) => (
-    <Layout>
-        {page}
-    </Layout>
-);
 
 export default Top;

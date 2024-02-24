@@ -1,11 +1,6 @@
 import * as React from 'react';
 import 'tailwindcss/tailwind.css';
 import '../app/globals.css';
-import { Layout } from "../app/layout";
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import Image from 'next/image';
 
 function Alumni() {
     const alumnis = [
@@ -18,11 +13,10 @@ function Alumni() {
     ];
 
     return (
-        <div className='w-4/5 flex flex-col items-center align-middle justify-center mx-auto my-8'>
+        <div className='w-4/5 flex flex-col items-center align-middle justify-center mx-auto mt-0 mb-8'>
             <div className='font-bold text-3xl mt-8'>Notable Alumni</div>
             <div className='flex h-fit mb-8 mt-8'>
                 {alumnis.map((alumni) => (
-                    <div>
                         <div key={alumni.id} className='w-64 h-96 m-4 bg-rgba-off-blue flex flex-col text-left rounded-lg' style={{ border: '1px solid rgba(227, 226, 255, 1)', backgroundImage: `url(${alumni.src})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', zIndex: 2, position: "relative" }}>
                             {/* Add other content related to alumni */}
                             <div className='w-64 h-60 rounded-b-lg flex flex-col'
@@ -43,9 +37,6 @@ function Alumni() {
                                 </div>
                             </div>
                         </div>
-
-
-                    </div>
                 ))}
             </div>
             <button className='button-rgba-blue font-bold text-base rounded-lg h-14 w-80 text-rgba-white'>Check Admit Eligibility</button>
@@ -53,10 +44,5 @@ function Alumni() {
     );
 }
 
-Alumni.getLayout = (page) => (
-    <Layout>
-        {page}
-    </Layout>
-);
 
 export default Alumni;

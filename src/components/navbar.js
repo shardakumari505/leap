@@ -1,7 +1,7 @@
 import * as React from 'react';
 import 'tailwindcss/tailwind.css';
 import '../app/globals.css';
-import { Layout } from "../app/layout";
+import { Layout } from "../layout/layout";
 import Image from 'next/image';
 
 
@@ -19,10 +19,5 @@ function Navbar() {
     );
 }
 
-Navbar.getLayout = (page) => (
-    <Layout>
-        {page}
-    </Layout>
-);
 
 export default Navbar;

@@ -76,4 +76,12 @@
   .border-bottom-custom {
     border-bottom : 0.0625rem solid rgba(0, 0, 0, .07);
   }
+
+  .custom-placeholder::placeholder {
+    /* color: #000000; */
+    color: rgba(142, 142, 142, 1);
+    font-size: 16px;
+    /* padding-left: 12px; */
+    font-weight: medium;
+}
 }

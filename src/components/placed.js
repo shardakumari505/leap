@@ -13,17 +13,37 @@ function Placed() {
     { src: '/amazonlogo.png', alt: 'Amazon Logo', color: 'bg-slate-400' },
   ];
 
+  const [isMobileScreen, setIsMobileScreen] = React.useState(false);
+
+    React.useEffect(() => {
+        const handleResize = () => {
+            setIsMobileScreen(window.innerWidth < 900);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
   return (
     <div className='w-4/5 flex flex-col items-center align-middle justify-center mx-auto my-8'>
       <div className='font-bold text-3xl mt-16'>Get placed in</div>
-      <div className='flex w-full h-fit mb-16 mt-8'>
+      <div className='flex w-full h-fit mb-8 mt-8'>
         {logos.map((logo, index) => (
           <div key={index} className={`w-full flex items-center py-5 justify-around`}>
             <Image src={logo.src} alt={logo.alt} width={100} height={15} style={{width: "10vw", height:"8vh", objectFit:"contain"}} />
           </div>
         ))}
       </div>
-      <div className='flex flex-col w-full bg-slate-500 h-auto rounded-2xl' style={{ background: "linear-gradient(95.83deg, #F8F8FF 0.47%, #F4E9FF 31.83%, #FFF5EC 70.04%, #E8E8FF 99.42%)", overflow:"hidden" }}>
+      {isMobileScreen ? (<div className='flex w-full h-auto rounded-2xl items-center align-middle justify-center'><Image
+                                        src="/placedimage.png"
+                                        alt="Example Image"
+                                        width={500}
+                                        height={800}
+                                        style={{ objectFit:"contain"}}
+                                    /></div>):
+      (<div className='flex flex-col w-full bg-slate-500 h-auto rounded-2xl' style={{ background: "linear-gradient(95.83deg, #F8F8FF 0.47%, #F4E9FF 31.83%, #FFF5EC 70.04%, #E8E8FF 99.42%)", overflow:"hidden" }}>
         <div className='font-bold text-4xl ml-16 mt-8'>Why should you consider <br></br> <strong className='text-rgba-blue-shade' >LeapAdvantage?</strong></div>
         <div className='flex justify-between ml-16'>
           <div className='flex flex-col mt-8 pb-8'>
@@ -94,7 +114,7 @@ function Placed() {
 
 
         </div>
-      </div>
+      </div>)}
     </div>
   );
 }

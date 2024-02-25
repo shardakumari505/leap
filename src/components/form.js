@@ -19,6 +19,7 @@ import StepLabel from '@mui/material/StepLabel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import Image from 'next/image';
 
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
@@ -132,6 +133,7 @@ const Form = () => {
         step2: '',
         step3: '',
     });
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const handleInputChange = (fieldName, value) => {
         setFormData((prevData) => ({
@@ -157,9 +159,19 @@ const Form = () => {
 
             requiredFields.forEach((field) => {
                 if (!formData[field]) {
-                    newErrors[field] = `Please enter ${field === 'dateOfBirth' ? 'a valid date' : 'a value'} for ${field}.`;
+                    newErrors[field] = `Please enter ${field === 'dateOfBirth' ? 'a valid date' : 'a value'} for ${field}`;
                 }
             });
+
+            const nameRegex = /^[a-zA-Z]+$/;
+
+            if (!nameRegex.test(formData.firstName)) {
+                newErrors.firstName = 'Incorrect Entry';
+            }
+
+            if (!nameRegex.test(formData.lastName)) {
+                newErrors.lastName = 'Incorrect Entry';
+            }
 
             if (Object.keys(newErrors).length > 0) {
                 console.error('Form validation failed:', newErrors);
@@ -184,7 +196,7 @@ const Form = () => {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (!emailRegex.test(formData.emailId)) {
-                const errorMessage = 'Invalid email format. Please enter a valid email address.';
+                const errorMessage = 'Incorrect Entry';
                 console.error(errorMessage);
                 setError(errorMessage);
                 return;
@@ -203,11 +215,28 @@ const Form = () => {
                 }
             });
 
+            const addressRegex = /^[a-zA-Z0-9\s\-,]+$/;
+
+            if (!addressRegex.test(formData.addressLine1)) {
+                newErrors.addressLine1 = 'Incorrect Entry';
+            }
+
+            if (!addressRegex.test(formData.addressLine2)) {
+                newErrors.addressLine2 = 'Incorrect Entry';
+            }
+
+            const pinCodeRegex = /^[0-9]{6}$/;
+
+            if (!pinCodeRegex.test(formData.pinCode)) {
+                newErrors.pinCode = 'Incorrect Entry';
+            }
+
             if (Object.keys(newErrors).length > 0) {
                 console.error('Form validation failed:', newErrors);
                 setErrors(newErrors);
                 return;
             }
+
             setError('');
 
             setCurrentStep((prevStep) => prevStep + 1);
@@ -220,6 +249,7 @@ const Form = () => {
 
     const handleSubmit = () => {
         console.log('Form submitted:', formData);
+        setFormSubmitted(true);
     };
 
     const isStepValid = () => {
@@ -227,6 +257,12 @@ const Form = () => {
     };
 
     const handleDropdownChange = (selectedOption) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            country: selectedOption.value,
+            state: selectedOption.value,
+            city: selectedOption.value
+        }));
     };
 
     const formFields = [
@@ -234,17 +270,17 @@ const Form = () => {
         { step: 0, label: 'Last Name', name: 'lastName', type: 'text' },
         { step: 0, label: 'Email ID', name: 'emailId', type: 'email' },
         { step: 0, label: 'Date of Birth', name: 'dateOfBirth', type: 'datePicker' },
-        { step: 1, label: 'Address Line1', name: 'addressLine1', type: 'text' },
-        { step: 1, label: 'Address Line2 (optional)', name: 'addressLine2', type: 'text' },
+        { step: 1, label: 'Address Line 1', name: 'addressLine1', type: 'text' },
+        { step: 1, label: 'Address Line 2 (optional)', name: 'addressLine2', type: 'text' },
         { step: 1, label: 'Country', name: 'country', type: 'dropdown' },
         { step: 1, label: 'State', name: 'state', type: 'dropdown' }, // Assuming state needs a date picker
         { step: 1, label: 'City', name: 'city', type: 'dropdown' }, // Assuming city needs a date picker
-        { step: 1, label: 'PinCode', name: 'pinCode', type: 'text' },
+        { step: 1, label: 'Pincode', name: 'pinCode', type: 'text' },
         // ... add more fields as needed for each step
     ];
 
     return (
-        <div className='w-full'>
+        <div className='w-full font-inter'>
             <div className='flex flex-col justify-center align-middle text-center my-4'>
                 <div className='text-3xl font-bold my-8'>Fill this form to check your eligibility</div>
                 <Box
@@ -258,153 +294,178 @@ const Form = () => {
                         },
                     }}
                 >
-                    <Paper elevation={3}>
-                        <div className='py-4 pl-4 text-left text-base font-bold text-rgba-black'>Complete Student Profile</div>
-                        <Divider />
-                        <div className='py-4'>
-                            <Stack sx={{ width: '100%' }} spacing={4}>
-                                <Stepper alternativeLabel activeStep={currentStep} connector={<QontoConnector />}>
-                                    {steps.map((label, index) => (
-                                        <Step key={label}>
-                                            <StepLabel StepIconComponent={QontoStepIcon} completed={index < currentStep}>
-                                                {label}
-                                            </StepLabel>
-                                        </Step>
-                                    ))}
-                                </Stepper>
-                            </Stack>
-                        </div>
-
-                        {currentStep === 0 && (
-                            <div>
-                                <div className='py-4 pl-4 text-left text-xl font-normal text-rgba-black'>Let’s Enter your Personal Details</div>
-                                <div className='flex flex-wrap' style={{ display: "flex", flexWrap: "wrap" }}>
-                                    {formFields
-                                        .filter((field) => field.step === 0)
-                                        .map((field) => (
-                                            <div key={field.name} className='' style={{ display: "flex", flexDirection: "column", marginInline: "16px", paddingBottom: "20px" }}>
-                                                <label className='text-base font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}</label>
-                                                {field.type === 'datePicker' ? (
-                                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                                        <StyledDatePicker
-                                                            value={formData[field.name]}
-                                                            onChange={(date) => handleInputChange(field.name, date)}
-                                                            placeholder='DD/MM/YY'
-                                                        />
-                                                    </LocalizationProvider>
-                                                ) : (
-                                                    <input
-                                                        type={field.type}
-                                                        value={formData[field.name]}
-                                                        onChange={(e) => handleInputChange(field.name, e.target.value)}
-                                                        style={{ minWidth: "20vw", borderRadius: "4px", border: "1px solid rgba(203, 202, 213, 1)", height: "44px", color: "#000000", fontSize: "16px", fontWeight: "400", outline: "none", paddingInline: "12px" }}
-                                                        placeholder={`Enter your ${field.label.toLowerCase()}`}
-                                                        className="custom-placeholder"
-                                                    />
-                                                )}
-                                                {errors[field.name] && (
-                                                    <div className='text-red-500 my-2'>
-                                                        {errors[field.name]}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        ))}
+                    {formSubmitted ? (
+                        <Paper elevation={3}>
+                            <div className='py-4 pl-4 text-left text-base font-bold text-rgba-black'>Complete Student Profile</div>
+                            <Divider />
+                            <div className='w-fit h-fit bg-rgba-off-white-green border-form-submit rounded-lg mx-auto mb-20 mt-10 px-20'>
+                                <div className='bg-teal flex flex-col items-center py-8'>
+                                    <Image
+                                        src="/formsubmitlogo.png"
+                                        alt="Example Image"
+                                        width={50}
+                                        height={100}
+                                    // style={{  position: 'relative', transform: 'translate(-20%, -15%)' }}
+                                    />
                                 </div>
-                                <div>
-                                    {error && (
-                                        <div className='text-red-500 my-4'>
-                                            {error}
-                                        </div>
-                                    )}
+                                <div className='font-bold text-xl text-rgba-form-submit-green p-2'>
+                                    That’s all we need.
+                                </div>
+                                <div className='text-xl font-normal text-rgba-form-submit-green p-2'>Thank you for your time. We will get back soon</div>
+                                <div className='flex justify-between py-4'>
                                 </div>
                             </div>
-                        )}
-
-                        {currentStep === 1 && (
-                            <div>
-                                <div className='py-4 pl-4 text-left text-xl font-normal text-rgba-black'>Enter your current mailing address</div>
-                                <div className='flex flex-wrap' style={{ display: "flex", flexWrap: "wrap" }}>
-                                    {formFields
-                                        .filter((field) => field.step === 1)
-                                        .map((field) => (
-                                            <div key={field.name} className='' style={{ display: "flex", flexDirection: "column", marginInline: "16px", paddingBottom: "20px" }}>
-                                                <label className='text-base font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}</label>
-                                                {field.type === 'dropdown' ? (
-                                                    <Dropdown options={options} onChange={handleDropdownChange} value={options[0]} placeholder={`Select ${field.label.toLowerCase()}`} />
-                                                ) : (
-                                                    <input
-                                                        type={field.type}
-                                                        value={formData[field.name]}
-                                                        onChange={(e) => handleInputChange(field.name, e.target.value)}
-                                                        style={{ minWidth: "20vw", borderRadius: "4px", border: "1px solid rgba(203, 202, 213, 1)", height: "44px", color: "#000000", fontSize: "16px", fontWeight: "400", outline: "none", paddingInline: "12px" }}
-                                                        placeholder={`Enter your ${field.label.toLowerCase()}`}
-                                                        className="custom-placeholder"
-                                                    />
-                                                )}
-                                                {errors[field.name] && (
-                                                    <div className='text-red-500 my-2'>
-                                                        {errors[field.name]}
-                                                    </div>
-                                                )}
-                                            </div>
+                        </Paper>
+                    ) :
+                        (<Paper elevation={3}>
+                            <div className='py-4 pl-4 text-left text-base font-bold text-rgba-black'>Complete Student Profile</div>
+                            <Divider />
+                            <div className='py-4'>
+                                <Stack sx={{ width: '100%' }} spacing={4}>
+                                    <Stepper alternativeLabel activeStep={currentStep} connector={<QontoConnector />}>
+                                        {steps.map((label, index) => (
+                                            <Step key={label}>
+                                                <StepLabel StepIconComponent={QontoStepIcon} completed={index < currentStep}>
+                                                    {label}
+                                                </StepLabel>
+                                            </Step>
                                         ))}
-                                </div>
-                                <div>
-                                    {error && (
-                                        <div className='text-red-500 my-4'>
-                                            {error}
-                                        </div>
-                                    )}
-                                </div>
+                                    </Stepper>
+                                </Stack>
                             </div>
-                        )}
 
-                        {currentStep === 2 && (
-                            <div>
-                                <h2>{steps[currentStep]}</h2>
+                            {currentStep === 0 && (
                                 <div>
-                                    <div className='py-4 pl-4 text-left text-xl font-normal text-rgba-black'>Personal Details</div>
-                                    <div className='flex flex-wrap'>
+                                    <div className='py-4 pl-4 text-left text-xl font-normal text-rgba-black'>Let’s Enter your Personal Details</div>
+                                    <div className='flex flex-wrap md:justify-start justify-center' style={{ display: "flex", flexWrap: "wrap" }}>
                                         {formFields
                                             .filter((field) => field.step === 0)
                                             .map((field) => (
-                                                <div key={field.name} className='mx-4 px-4 py-2 flex flex-col bg-slate-500'>
-                                                    <div className='font-normal text-sm'>{field.label}</div>
-                                                    <div className='font-semibold text-sm'>{formData[field.name]}</div>
+                                                <div key={field.name} className='' style={{ display: "flex", flexDirection: "column", marginInline: "16px", paddingBottom: "20px" }}>
+                                                    <label className='text-base font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}</label>
+                                                    {field.type === 'datePicker' ? (
+                                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                            <StyledDatePicker
+                                                                value={formData[field.name]}
+                                                                onChange={(date) => handleInputChange(field.name, date)}
+                                                                placeholder='DD/MM/YY'
+                                                            />
+                                                        </LocalizationProvider>
+                                                    ) : (
+                                                        <input
+                                                            type={field.type}
+                                                            value={formData[field.name]}
+                                                            onChange={(e) => handleInputChange(field.name, e.target.value)}
+                                                            style={{ minWidth: "20vw", borderRadius: "4px", border: "1px solid rgba(203, 202, 213, 1)", height: "44px", color: "#000000", fontSize: "16px", fontWeight: "400", outline: "none", paddingInline: "12px" }}
+                                                            placeholder={`Enter your ${field.label.toLowerCase()}`}
+                                                            className="custom-placeholder"
+                                                        />
+                                                    )}
+                                                    {errors[field.name] && (
+                                                        <div className='text-red-500 my-2'>
+                                                            {errors[field.name]}
+                                                        </div>
+                                                    )}
                                                 </div>
                                             ))}
                                     </div>
-                                    <div className='py-4 pl-4 text-left text-xl font-normal text-rgba-black'>Mailing Address</div>
-                                    <div className='flex flex-wrap'>
+                                    <div>
+                                        {error && (
+                                            <div className='text-red-500 my-4'>
+                                                {error}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {currentStep === 1 && (
+                                <div>
+                                    <div className='py-4 pl-4 text-left text-xl font-normal text-rgba-black'>Enter your current mailing address</div>
+                                    <div className='flex flex-wrap md:justify-start justify-center' style={{ display: "flex", flexWrap: "wrap" }}>
                                         {formFields
                                             .filter((field) => field.step === 1)
                                             .map((field) => (
-                                                <div key={field.name} className='' style={{ display: "flex", flexDirection: "column", marginInline: "16px" }}>
-                                                    <label className='text-xs font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}</label>
-                                                    <div>{formData[field.name]}</div>
+                                                <div key={field.name} className='' style={{ display: "flex", flexDirection: "column", marginInline: "16px", paddingBottom: "20px" }}>
+                                                    <label className='text-base font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}</label>
+                                                    {field.type === 'dropdown' ? (
+                                                        <Dropdown options={options} onChange={handleDropdownChange} value={options[0]} placeholder={`Select ${field.label.toLowerCase()}`} />
+                                                    ) : (
+                                                        <input
+                                                            type={field.type}
+                                                            value={formData[field.name]}
+                                                            onChange={(e) => handleInputChange(field.name, e.target.value)}
+                                                            style={{ minWidth: "20vw", borderRadius: "4px", border: "1px solid rgba(203, 202, 213, 1)", height: "44px", color: "#000000", fontSize: "16px", fontWeight: "400", outline: "none", paddingInline: "12px" }}
+                                                            placeholder={`Enter your ${field.label.toLowerCase()}`}
+                                                            className="custom-placeholder"
+                                                        />
+                                                    )}
+                                                    {errors[field.name] && (
+                                                        <div className='text-red-500 my-2'>
+                                                            {errors[field.name]}
+                                                        </div>
+                                                    )}
                                                 </div>
                                             ))}
                                     </div>
+                                    <div>
+                                        {error && (
+                                            <div className='text-red-500 my-4'>
+                                                {error}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
 
-                        <Divider />
-                        <div className='flex justify-between py-4'>
-                            {currentStep > 0 && (
-                                <button style={{ border: "1px solid rgba(68, 62, 255, 1)" }} className='w-40 h-219 py-4 px-4 ml-4 flex text-center justify-center text-sm rounded font-normal text-rgba-dark-blue' onClick={handleBack}>Back</button>
+                            {currentStep === 2 && (
+                                <div>
+                                    <h2>{steps[currentStep]}</h2>
+                                    <div>
+                                        <div className='py-4 pl-4 text-left text-xl font-normal text-rgba-black'>Personal Details</div>
+                                        <div className='flex flex-wrap'>
+                                            {formFields
+                                                .filter((field) => field.step === 0)
+                                                .map((field) => (
+                                                    <div key={field.name} className='mx-4 px-4 py-2 flex flex-col min-w-64'>
+                                                        <div className='font-normal text-sm'>{field.label}</div>
+                                                        {field.type === 'datePicker' ?
+                                                            (<div className='text-base font-bold '>{dayjs(formData[field.name]).format('DD/MM/YY')}</div>) : (<div className='text-base font-bold '>{formData[field.name]}</div>)}
+
+                                                    </div>
+                                                ))}
+                                        </div>
+                                        <div className='py-4 pl-4 text-left text-xl font-normal text-rgba-black'>Mailing Address</div>
+                                        <div className='flex flex-wrap'>
+                                            {formFields
+                                                .filter((field) => field.step === 1)
+                                                .map((field) => (
+                                                    <div key={field.name} className='min-w-64 mx-4 px-4 py-2 my-4' style={{ display: "flex", flexDirection: "column", marginInline: "16px" }}>
+                                                        <label className='text-sm font-normal text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}</label>
+                                                        <div className='text-base font-bold '>{formData[field.name]}</div>
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+                                </div>
                             )}
-                            <div className='flex-grow'></div>
-                            {currentStep < steps.length - 1 && (
-                                <button className='w-40 h-219 py-4 px-4 mr-4 flex text-center justify-center text-sm rounded font-normal text-rgba-white button-rgba-blue' onClick={handleNext} disabled={!isStepValid()}>
-                                    Save & Continue
-                                </button>
-                            )}
-                            {currentStep === steps.length - 1 && (
-                                <button className='w-40 h-219 py-4 px-4 mr-4 flex text-center justify-center text-sm rounded font-normal text-rgba-white button-rgba-blue' onClick={handleSubmit}>Finish</button>
-                            )}
-                        </div>
-                    </Paper>
+
+                            <Divider />
+                            <div className='flex justify-between py-4'>
+                                {currentStep > 0 && (
+                                    <button style={{ border: "1px solid rgba(68, 62, 255, 1)" }} className='w-40 h-219 py-4 px-4 ml-4 flex text-center justify-center text-sm rounded font-normal text-rgba-dark-blue' onClick={handleBack}>Back</button>
+                                )}
+                                <div className='flex-grow'></div>
+                                {currentStep < steps.length - 1 && (
+                                    <button className='w-40 h-219 py-4 px-4 mr-4 flex text-center justify-center text-sm rounded font-normal text-rgba-white button-rgba-blue' onClick={handleNext} >
+                                        Save & Continue
+                                    </button>
+                                )}
+                                {currentStep === steps.length - 1 && (
+                                    <button className='w-40 h-219 py-4 px-4 mr-4 flex text-center justify-center text-sm rounded font-normal text-rgba-white button-rgba-blue' onClick={handleSubmit}>Finish</button>
+                                )}
+                            </div>
+                        </Paper>)}
                 </Box>
             </div>
         </div>

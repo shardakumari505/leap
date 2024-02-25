@@ -27,7 +27,7 @@ function Alumni() {
     }, []);
 
     return (
-        <div className='w-full flex flex-col items-center align-middle justify-center mx-auto mt-0 mb-8'>
+        <div className='w-full flex flex-col items-center align-middle justify-center mx-auto mt-0 mb-8 font-inter'>
             <div className='font-bold text-3xl mt-8'>Notable Alumni</div>
             
             <div className='flex h-fit mb-8 mt-8 flex-wrap justify-center'>

@@ -51,6 +51,9 @@
   }
   .text-rgba-form-submit-green{
     color: rgba(13, 96, 8, 1);
+  }
+  .text-rgba-alert-red{
+    color: rgba(255, 50, 54, 1);
 
   }
   .bg-rgba-white{
@@ -98,3 +101,12 @@
   box-shadow: 0 0 25px 5px #000;
 }
 }
+
+.button-border-shadow{
+  border: 1px solid #92B586;
+  box-shadow : 1px 1px #92B586 inset;
+}
+
+
+
+

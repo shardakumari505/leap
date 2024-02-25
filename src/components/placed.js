@@ -27,7 +27,7 @@ function Placed() {
     }, []);
 
   return (
-    <div className='w-4/5 flex flex-col items-center align-middle justify-center mx-auto my-8'>
+    <div className='w-4/5 flex flex-col items-center align-middle justify-center mx-auto my-8 font-inter'>
       <div className='font-bold text-3xl mt-16'>Get placed in</div>
       <div className='flex w-full h-fit mb-8 mt-8'>
         {logos.map((logo, index) => (

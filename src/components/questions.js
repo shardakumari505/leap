@@ -14,8 +14,8 @@ function Questions() {
     ];
 
     return (
-        <div className='w-full flex flex-col items-center align-middle justify-center mx-auto mt-16 bg-rgba-off-blue'>
-            <div className="font-bold text-3xl mt-8 text-rgba-dark-blue">Got questions? Let&apos;s connect!</div>
+        <div className='w-full flex flex-col items-center align-middle justify-center mx-auto mt-16 bg-rgba-off-blue font-inter'>
+            <div className="font-bold text-3xl mt-8 text-rgba-dark-blue text-center">Got questions? Let&apos;s connect!</div>
             <div className='w-4/5 flex flex-col h-fit mb-16 mt-8'>
                 {questions.map((question) => (
                     <div key={question.id} className='w-full m-1 flex justify-between py-5 pb-5 px-5 rounded items-center bg-rgba-white border-bottom-custom'>

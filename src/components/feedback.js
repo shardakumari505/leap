@@ -31,13 +31,13 @@ function Feedback() {
     }, []);
 
     return (
-        <div className='w-4/5 flex flex-col items-center align-middle justify-center my-8 mx-auto'>
-            <div className='font-bold text-3xl mt-8'>What are students saying</div>
+        <div className='w-4/5 flex flex-col items-center align-middle justify-center my-8 mx-auto font-inter'>
+            <div className='font-bold text-3xl mt-8 text-center'>What are students saying</div>
             <div className='w-full flex h-fit mb-16 mt-8 flex-wrap justify-center'>
             {isMobileScreen ? (
             <Carousel className='bg-pink w-72'>
                 {feedbacks.map((feedback) => (
-                    <div key={feedback.id} className='w-full h-80 m-3 bg-rgba-off-blue flex flex-col py-5 pb-5 px-5 text-left rounded-lg mx-auto' style={{ border: '1px solid rgba(227, 226, 255, 1)' }}>
+                    <div key={feedback.id} className='w-full h-96 m-3 bg-rgba-off-blue flex flex-col py-5 pb-5 px-5 text-left rounded-lg mx-auto' style={{ border: '1px solid rgba(227, 226, 255, 1)' }}>
                         <div className='pb-4 text-base font-medium text-rgba-shade-gray text-justify'>{feedback.feedback}</div>
                         <div className='flex-grow' /> {/* Add space between feedback and divider */}
                         <Divider />

@@ -8,7 +8,7 @@ import CardMembershipIcon from '@mui/icons-material/CardMembership';
 function Top() {
     return (
         <div     
-            className='w-full'       
+            className='w-full font-inter'       
             style={{position: 'relative',
             height: '100vh', // Adjust the height based on your design
             width:"100%",
@@ -46,11 +46,11 @@ function Top() {
                 }}
             ></div>
 
-            <div className='flex flex-wrap w-4/5 mx-auto justify-between'>
+            <div className='flex flex-wrap w-4/5 mx-auto md:justify-between sm:items-center sm:justify-center md:items-start'>
 
                 <div style={{ position: "relative", zIndex: "3" }} className='flex flex-col items-center md:justify-center md:items-start'>
 
-                    <div style={{ position: "relative", zIndex: "3", borderRadius: "30px", border: "2px solid linear-gradient(to bottom, rgba(146, 181, 134, 1), rgba(255, 255, 255, 0)) 1", }} className='z-8 flex justify-center align-middle text-center items-center bg-rgba-off-white-green w-fit py-4 px-8 rounded-full mt-20'>
+                    <div style={{ position: "relative", zIndex: "3", borderRadius: "30px", border: "2px solid linear-gradient(to bottom, rgba(146, 181, 134, 1), rgba(255, 255, 255, 0)) 1", }} className='z-8 flex justify-center align-middle text-center items-center bg-rgba-off-white-green w-fit py-4 px-8 rounded-full mt-20 button-border-shadow'>
                         <div className=''><CardMembershipIcon style={{ height: "20px", width: "20px", color: "rgba(51, 46, 191, 1)", marginRight: "10px" }} /></div>
                         <div className='text-base font-semibold text-rgba-dark-green flex align-middle text-center justify-center'>₹17L Scholarship Assured* </div>
                     </div>
@@ -88,8 +88,7 @@ function Top() {
 
                 </div>
 
-                <div style={{ position: "relative", zIndex: "4" }} className='flex flex-col mt-20 bg-rgba-white w-fit h-fit p-5 rounded-xl'>
-
+                <div style={{ zIndex: "4" }} className='w-full md:w-fit flex mt-20 bg-rgba-white h-fit p-5 rounded-xl md:mx-0 sm:mx-auto justify-center'>
                     <Image
                         src="/unilogo.png"
                         alt="Example Image"
@@ -98,7 +97,7 @@ function Top() {
                     />
                 </div>
 
-                <div style={{ borderRadius: "12px", position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%) translateY(50%)", zIndex: 2, boxShadow: "0px 4px 8px rgba(67, 54, 149, 0.08)" }} className='bg-rgba-white w-fit h-fit flex p-5'>
+                <div style={{ borderRadius: "12px", position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%) translateY(50%)", zIndex: 2, boxShadow: "4px 8px 8px rgba(67, 54, 149, 0.08)" }} className='bg-rgba-white w-fit h-fit flex p-5'>
                     <div className='flex flex-col justify-center align-middle items-center text-center px-5'>
                         <div className='font-bold text-3xl text-rgba-gray'>#1</div>
                         <div className='font-medium text-sm text-rgba-gray'>Best Engineering Jobs</div>

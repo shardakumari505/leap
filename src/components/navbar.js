@@ -49,7 +49,7 @@ class Navbar extends React.Component {
         const { isMobileScreen } = this.state;
 
         return (
-            <div className='w-full navbar-box-shadow navbar-container'>
+            <div className='w-full navbar-box-shadow navbar-container font-inter'>
                 <div className='w-4/5 flex justify-between mx-auto items-center align-middle py-1 navbar-container-md'>
                     <div className=''>
                         <Image

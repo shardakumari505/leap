@@ -10,11 +10,12 @@ import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import Image from 'next/image';
+import Divider from '@mui/material/Divider';
 
 
 function Home() {
     return (
-        <div className='w-4/5 mx-auto h-fit mt-24 pb-24'>
+        <div className='w-4/5 mx-auto h-fit mt-24 pb-24 font-inter'>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "10px", marginBottom: "12px" }}>
                 <span className='text-xl font-normal p-2'>About Case Western University</span>
                 <span className='text-4xl font-bold mb-5'>Learn about the program, fees, jobs & more</span>
@@ -118,7 +119,7 @@ function Home() {
                             style={{ borderRadius: "12px", position: "absolute", top: 0, left: "50%", transform: "translate(-50%, -50%)", zIndex: 2 }}
                         />
 
-                        <div className='h-28 z-10 w-full flex rounded-lg' style={{ position:"absolute", bottom:0, background: 'linear-gradient(96.94deg, #F3EDFF 34.36%, rgba(255, 217, 190, 0.21) 95.05%)', backdropFilter: "blur(10px)", }} >
+                        <div className='h-28 z-10 w-full flex rounded-lg' style={{ position: "absolute", bottom: 0, background: 'linear-gradient(96.94deg, #F3EDFF 34.36%, rgba(255, 217, 190, 0.21) 95.05%)', backdropFilter: "blur(10px)", }} >
                             <div className='w-1/2 p-4 flex flex-col text-center ' >
                                 <span className='text-3xl font-bold text-rgba-light-blue'>
                                     #1
@@ -141,8 +142,9 @@ function Home() {
                 <TabPanel className="w-full font-sans text-sm flex flex-col justify-between align-center mx-auto px-10" value={2}>
                     <div className='text-3xl font-semibold mb-8'>Program Timeline</div>
                     <div className='w-full flex flex-wrap justify-between align-center'>
-                        <div className='text-lg text-justify w-full sm:w-full md:w-1/3 flex flex-col'>
-                            <div className='text-xl font-normal mb-16'>
+
+                        <div className='text-lg text-justify w-full sm:w-full md:w-2/5 flex flex-col'>
+                            <div className='text-xl font-normal mb-8'>
                                 <strong style={{ fontWeight: 'bold' }}>1st Semester </strong>(In India)
                                 <ul className="list-disc pl-5 text-rgba-gray text-base font-normal mt-4">
                                     <li className='py-1 text-lg'>Start 1st semester in India </li>
@@ -151,6 +153,7 @@ function Home() {
                                     <li className='py-1 text-lg'>Move to USA after 1st semester</li>
                                 </ul>
                             </div>
+
                             <div className='text-xl font-normal mt-8'>
                                 <strong style={{ fontWeight: 'bold' }}>2nd, 3rd & 4th Semester </strong>(In USA)
                                 <ul className="list-disc pl-5 text-rgba-gray text-base font-normal mt-4">

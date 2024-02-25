@@ -11,7 +11,8 @@ function Top() {
             className='w-full'       
             style={{position: 'relative',
             height: '100vh', // Adjust the height based on your design
-            width:"100%"}}
+            width:"100%",
+        marginTop:"10vh"}}
         >
             {/* Background Image */}
             <div
@@ -45,17 +46,17 @@ function Top() {
                 }}
             ></div>
 
-            <div className='flex justify-between flex-wrap w-4/5 mx-auto'>
+            <div className='flex flex-wrap w-4/5 mx-auto justify-between'>
 
-                <div style={{ position: "relative", zIndex: "3" }} className='flex flex-col'>
+                <div style={{ position: "relative", zIndex: "3" }} className='flex flex-col items-center md:justify-center md:items-start'>
 
                     <div style={{ position: "relative", zIndex: "3", borderRadius: "30px", border: "2px solid linear-gradient(to bottom, rgba(146, 181, 134, 1), rgba(255, 255, 255, 0)) 1", }} className='z-8 flex justify-center align-middle text-center items-center bg-rgba-off-white-green w-fit py-4 px-8 rounded-full mt-20'>
                         <div className=''><CardMembershipIcon style={{ height: "20px", width: "20px", color: "rgba(51, 46, 191, 1)", marginRight: "10px" }} /></div>
                         <div className='text-base font-semibold text-rgba-dark-green flex align-middle text-center justify-center'>₹17L Scholarship Assured* </div>
                     </div>
 
-                    <div className='text-5xl font-bold text-rgba-white mt-10 mb-5'>Masters in <br></br>Computer Science</div>
-                    <div className='flex my-2'>
+                    <div className='text-5xl font-bold text-rgba-white mt-10 mb-5 flex text-center md:text-left'>Masters in <br></br>Computer Science</div>
+                    <div className='flex my-2 '>
                         <Image
                             src="/correct.png"
                             alt="Example Image"
@@ -64,7 +65,7 @@ function Top() {
                         />
                         <div className='font-semibold text-lg text-rgba-white ml-3'>No IELTS or GRE* required</div>
                     </div>
-                    <div className='flex my-2'>
+                    <div className='flex my-2 '>
                         <Image
                             src="/correct.png"
                             alt="Example Image"
@@ -73,7 +74,7 @@ function Top() {
                         />
                         <div className='font-semibold text-lg text-rgba-white ml-3'>3 year work Visa</div>
                     </div>
-                    <div className='flex my-2'>
+                    <div className='flex my-2 '>
                         <Image
                             src="/correct.png"
                             alt="Example Image"
@@ -95,8 +96,6 @@ function Top() {
                         width={200}
                         height={100}
                     />
-
-
                 </div>
 
                 <div style={{ borderRadius: "12px", position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%) translateY(50%)", zIndex: 2, boxShadow: "0px 4px 8px rgba(67, 54, 149, 0.08)" }} className='bg-rgba-white w-fit h-fit flex p-5'>

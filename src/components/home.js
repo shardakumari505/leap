@@ -103,7 +103,7 @@ function Home() {
                     </Tab>
                 </TabsList>
                 <TabPanel className="w-full font-sans text-sm mt-16 flex flex-wrap justify-between align-center" value={1}>
-                    <div className='text-lg text-justify w-full sm:w-full mb-8 sm:mb-0 flex items-center align-middle md:w-1/2 md:pr-8'>
+                    <div className='text-lg text-justify w-full sm:w-1/2 mb-8 sm:mb-0 flex items-center align-middle md:w-1/2 md:pr-8'>
                         The Case Western Reserve University is located in Cleveland, Ohio, US.
                         The Masters in Computer Science from Case Western Reserve University provides students with experiential and applied learning that ensures a higher level of understanding of the field. It is a 30-credit STEM-designated program.<br></br><br></br>
                         The degree is delivered in collaboration with Case Western Reserve University’s College of Engineering and includes 6 months in India and 1.5 years on campus in Ohio, US.
@@ -185,7 +185,6 @@ function Home() {
                     </div>
                 </TabPanel>
                 <TabPanel className="w-full font-sans text-sm flex flex-wrap items-center justify-between" value={4}>
-                    {/* <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}> */}
                     <div className='w-full sm:w-full md:w-1/2 text-lg text-rgba-light-blue font-medium '>
                         <p>With Leap Advantage, you save almost ₹17 lakhs on tuition fees.
                             <br></br>

@@ -7,6 +7,10 @@ function MyApp({ Component, pageProps }) {
         <StyledEngineProvider injectFirst>
             <Head>
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+                <meta
+                    name="viewport"
+                    content="initial-scale=1, width=device-width"
+                />
             </Head>
             <Layout>
                 <Component {...pageProps} />

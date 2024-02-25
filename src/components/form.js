@@ -244,7 +244,7 @@ const Form = () => {
     ];
 
     return (
-        <div>
+        <div className='w-full'>
             <div className='flex flex-col justify-center align-middle text-center my-4'>
                 <div className='text-3xl font-bold my-8'>Fill this form to check your eligibility</div>
                 <Box

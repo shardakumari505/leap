@@ -12,9 +12,8 @@ import Questions from '../components/questions';
 import Navbar from '@/components/navbar';
 
 
-function Dashboard() {
-    return (
-        <>
+const Dashboard= () => (
+        <div className='w-full'>
             <Navbar />
             <Top />
             <Home />
@@ -23,9 +22,8 @@ function Dashboard() {
             <Feedback />
             <Alumni />
             <Questions />
-        </>
-    );
-}
+        </div>
+)
 
 Dashboard.getLayout = (page) => (
     <Layout>

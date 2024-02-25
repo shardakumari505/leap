@@ -7,11 +7,11 @@ import CardMembershipIcon from '@mui/icons-material/CardMembership';
 
 function Top() {
     return (
-        <Box
-            sx={{
-                position: 'relative',
-                height: '100vh', // Adjust the height based on your design
-            }}
+        <div     
+            className='w-full'       
+            style={{position: 'relative',
+            height: '100vh', // Adjust the height based on your design
+            width:"100%"}}
         >
             {/* Background Image */}
             <div
@@ -100,15 +100,15 @@ function Top() {
                 </div>
 
                 <div style={{ borderRadius: "12px", position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%) translateY(50%)", zIndex: 2, boxShadow: "0px 4px 8px rgba(67, 54, 149, 0.08)" }} className='bg-rgba-white w-fit h-fit flex p-5'>
-                    <div className='flex flex-col justify-center align-middle items-center px-5'>
+                    <div className='flex flex-col justify-center align-middle items-center text-center px-5'>
                         <div className='font-bold text-3xl text-rgba-gray'>#1</div>
                         <div className='font-medium text-sm text-rgba-gray'>Best Engineering Jobs</div>
                     </div>
-                    <div className='flex flex-col justify-center align-middle items-center px-5'>
+                    <div className='flex flex-col justify-center align-middle items-center text-center px-5'>
                         <div className='font-bold text-3xl text-rgba-gray'>94%</div>
                         <div className='font-medium text-sm text-rgba-gray'>Placement Rate</div>
                     </div>
-                    <div className='flex flex-col justify-center align-middle items-center px-5'>
+                    <div className='flex flex-col justify-center align-middle items-center text-center px-5'>
                         <div className='font-bold text-3xl text-rgba-gray'>$96K</div>
                         <div className='font-medium text-sm text-rgba-gray'>Average Salary</div>
                     </div>
@@ -116,7 +116,7 @@ function Top() {
 
             </div>
 
-        </Box>
+        </div>
     );
 }
 

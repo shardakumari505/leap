@@ -13,9 +13,9 @@ function Alumni() {
     ];
 
     return (
-        <div className='w-4/5 flex flex-col items-center align-middle justify-center mx-auto mt-0 mb-8'>
+        <div className='w-full flex flex-col items-center align-middle justify-center mx-auto mt-0 mb-8'>
             <div className='font-bold text-3xl mt-8'>Notable Alumni</div>
-            <div className='flex h-fit mb-8 mt-8'>
+            <div className='flex h-fit mb-8 mt-8 flex-wrap justify-center'>
                 {alumnis.map((alumni) => (
                         <div key={alumni.id} className='w-64 h-96 m-4 bg-rgba-off-blue flex flex-col text-left rounded-lg' style={{ border: '1px solid rgba(227, 226, 255, 1)', backgroundImage: `url(${alumni.src})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', zIndex: 2, position: "relative" }}>
                             {/* Add other content related to alumni */}

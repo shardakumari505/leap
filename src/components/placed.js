@@ -5,12 +5,12 @@ import Image from 'next/image';
 
 function Placed() {
   const logos = [
-    { src: '/glogo.png', alt: 'Google Logo', width: 200, height: 10, color: 'bg-slate-500' },
-    { src: '/mclogo.png', alt: 'Microsoft Logo', width: 200, height: 10, color: 'bg-slate-400' },
-    { src: '/applelogo.png', alt: 'Apple Logo', width: 200, height: 10, color: 'bg-slate-600' },
-    { src: '/uberlogo.png', alt: 'Uber Logo', width: 200, height: 10, color: 'bg-slate-400' },
-    { src: '/teslalogo.png', alt: 'Tesla Logo', width: 200, height: 10, color: 'bg-slate-600' },
-    { src: '/amazonlogo.png', alt: 'Amazon Logo', width: 200, height: 10, color: 'bg-slate-400' },
+    { src: '/glogo.png', alt: 'Google Logo',color: 'bg-slate-500' },
+    { src: '/mclogo.png', alt: 'Microsoft Logo',color: 'bg-slate-400' },
+    { src: '/applelogo.png', alt: 'Apple Logo',color: 'bg-slate-600' },
+    { src: '/uberlogo.png', alt: 'Uber Logo', color: 'bg-slate-400' },
+    { src: '/teslalogo.png', alt: 'Tesla Logo', color: 'bg-slate-600' },
+    { src: '/amazonlogo.png', alt: 'Amazon Logo', color: 'bg-slate-400' },
   ];
 
   return (
@@ -18,8 +18,8 @@ function Placed() {
       <div className='font-bold text-3xl mt-16'>Get placed in</div>
       <div className='flex w-full h-fit mb-16 mt-8'>
         {logos.map((logo, index) => (
-          <div key={index} className={`bg-gray flex items-center py-5 px-16`}>
-            <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />
+          <div key={index} className={`w-full flex items-center py-5 justify-around`}>
+            <Image src={logo.src} alt={logo.alt} width={100} height={15} style={{width: "10vw", height:"8vh", objectFit:"contain"}} />
           </div>
         ))}
       </div>

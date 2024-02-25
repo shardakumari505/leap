@@ -11,11 +11,11 @@ function Feedback() {
     ];
 
     return (
-        <div className='w-4/5 flex flex-col items-center align-middle justify-center mx-auto my-8'>
+        <div className='w-4/5 flex flex-col items-center align-middle justify-center my-8 mx-auto'>
             <div className='font-bold text-3xl mt-8'>What are students saying</div>
-            <div className='flex h-fit mb-16 mt-8'>
+            <div className='w-full flex h-fit mb-16 mt-8 flex-wrap'>
                 {feedbacks.map((feedback) => (
-                    <div key={feedback.id} className='w-2/5 m-5 bg-rgba-off-blue flex flex-col py-5 pb-5 px-5 text-left rounded-lg' style={{ border: '1px solid rgba(227, 226, 255, 1)' }}>
+                    <div key={feedback.id} className='w-full sm:w-1/4 m-5 bg-rgba-off-blue flex flex-col py-5 pb-5 px-5 text-left rounded-lg mx-auto' style={{ border: '1px solid rgba(227, 226, 255, 1)' }}>
                         <div className='pb-4 text-base font-medium text-rgba-shade-gray text-justify'>{feedback.feedback}</div>
                         <div className='flex-grow' /> {/* Add space between feedback and divider */}
                         <Divider />

@@ -20,6 +20,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import Image from 'next/image';
+import axios from "axios";
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -100,7 +101,7 @@ const StyledDatePicker = styled(DatePicker)(({ theme }) => ({
 
 const steps = ['General Details', 'Address Details', 'Confirmation'];
 
-const options = ['one', 'two', 'three'];
+// const options = ['one', 'two', 'three'];
 
 const Form = () => {
     const [error, setError] = useState('');
@@ -120,6 +121,13 @@ const Form = () => {
     });
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [isFormValid, setIsFormValid] = useState(false);
+    const [countryOptions, setCountryOptions] = useState([]);
+    const [stateOptions, setStateOptions] = useState([]);
+    const [cities, setCities] = useState([]);
+    const [cityOptions, setCityOptions] = useState([]);
+    const [selectedCountry, setSelectedCountry] = useState('');
+    const [selectedState, setSelectedState] = useState('');
+
 
     useEffect(() => {
         handleValidation(); // Trigger validation on mount
@@ -240,38 +248,98 @@ const Form = () => {
 
     const handleSubmit = () => {
         console.log('Form submitted:', formData);
-    
+
         // Create a JSON Blob
         const jsonData = new Blob([JSON.stringify(formData)], { type: 'application/json' });
-    
+
         // Create a download link
         const downloadLink = document.createElement('a');
         downloadLink.href = URL.createObjectURL(jsonData);
         downloadLink.download = 'formData.json';
-    
+
         // Append the link to the body
         document.body.appendChild(downloadLink);
-    
+
         // Trigger a click on the link to start the download
         downloadLink.click();
-    
+
         // Remove the link from the body
         document.body.removeChild(downloadLink);
-    
+
         // Set formSubmitted to true
         setFormSubmitted(true);
     };
-    
+
+    useEffect(() => {
+        axios.get('https://countriesnow.space/api/v0.1/countries/states')
+            .then(response => {
+                const countriesAndStates = response.data.data;
+
+                // Extract country names
+                const countries = countriesAndStates.map(country => ({
+                    value: country.name,
+                    label: country.name,
+                    states: country.states.map(state => ({
+                        value: state.name,
+                        label: state.name,
+                    })),
+                }));
+
+                setCountryOptions(countries);
+            })
+            .catch(error => {
+                setError('Error fetching countries and states');
+                console.error(error);
+            });
+    }, []);
 
 
-    const handleDropdownChange = (selectedOption) => {
+
+    const handleDropdownChange = (selectedOption, fieldName) => {
+        const selectedValue = selectedOption.value;
+
+        if (fieldName === 'country') {
+            setSelectedCountry(selectedValue);
+        } else if (fieldName === 'state') {
+            setSelectedState(selectedValue);
+        }
+
+        const selectedCountryData = countryOptions.find(country => country.value === selectedValue);
         setFormData((prevData) => ({
             ...prevData,
-            country: selectedOption.value,
-            state: selectedOption.value,
-            city: selectedOption.value
+            [fieldName]: selectedValue,
+            state: '',  // Reset the state when the country changes
+            city: '',   // Reset the city when the country changes
+        }));
+        setStateOptions(selectedCountryData ? selectedCountryData.states : []);
+    };
+
+    useEffect(() => {
+        if (selectedCountry && selectedState) {
+            // Make an API call to fetch cities based on selectedCountry and selectedState
+            axios.get(`https://countriesnow.space/api/v0.1/countries/state/cities/q?country=${selectedCountry}&state=${selectedState}`)
+                .then(response => {
+                    const fetchedCities = response.data.data;
+                    setCityOptions(fetchedCities.map(city => ({
+                        value: city,
+                        label: city,
+                    })));
+                })
+                .catch(error => {
+                    setError('Error fetching cities');
+                    console.error(error);
+                });
+        }
+    }, [selectedCountry, selectedState]);
+
+    const handleCityDropdownChange = (selectedOption) => {
+        const selectedValue = selectedOption.value;
+        setFormData((prevData) => ({
+            ...prevData,
+            city: selectedValue,
         }));
     };
+
 
     const formFields = [
         { step: 0, label: 'First Name', name: 'firstName', type: 'text' },
@@ -398,19 +466,38 @@ const Form = () => {
                                                 <div key={field.name} className='' style={{ display: "flex", flexDirection: "column", marginInline: "16px", paddingBottom: "20px" }}>
                                                     {field.name != 'addressLine2' ?
                                                         (<label className='text-base font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}<strong className='text-rgba-alert-red'>*</strong></label>) : (<label className='text-base font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}</label>)}
-                                                    {field.type === 'dropdown' ? (
-                                                        <Dropdown options={options} onChange={handleDropdownChange} value={options[0]} placeholder={`Select ${field.label.toLowerCase()}`} />
-                                                    ) : (
-                                                        <input
-                                                            type={field.type}
-                                                            value={formData[field.name]}
-                                                            onChange={(e) => handleInputChange(field.name, e.target.value)}
-                                                            onBlur={() => handleValidation(field.name)}
-                                                            style={{ minWidth: "20vw", borderRadius: "4px", border: "1px solid rgba(203, 202, 213, 1)", height: "44px", color: "#000000", fontSize: "16px", fontWeight: "400", outline: "none", paddingInline: "12px" }}
-                                                            placeholder={`Enter your ${field.label.toLowerCase()}`}
-                                                            className="custom-placeholder"
-                                                        />
-                                                    )}
+                                                    {field.name === 'state' ? (<Dropdown
+                                                        options={field.name === 'country' ? countryOptions : stateOptions}
+                                                        onChange={(selectedOption) => handleDropdownChange(selectedOption, field.name)}
+                                                        value={formData[field.name]}
+                                                        style={{ minWidth: "20vw", borderRadius: "4px", border: "1px solid rgba(203, 202, 213, 1)", height: "44px", color: "#000000", fontSize: "16px", fontWeight: "400", outline: "none", paddingInline: "12px" }}
+                                                        placeholder={`Select ${field.label.toLowerCase()}`}
+                                                    />) :
+                                                        field.name === 'country' ?
+                                                            (<Dropdown
+                                                                options={field.name === 'country' ? countryOptions : stateOptions}
+                                                                onChange={(selectedOption) => handleDropdownChange(selectedOption, field.name)}
+                                                                value={formData[field.name]}
+                                                                placeholder={`Select ${field.label.toLowerCase()}`}
+                                                            />)
+                                                            :
+                                                            field.name === 'city' ?
+                                                                (<Dropdown
+                                                                    options={cityOptions}
+                                                                    onChange={(selectedOption) => handleCityDropdownChange(selectedOption)}
+                                                                    value={formData[field.name]}
+                                                                    placeholder={`Select ${field.label.toLowerCase()}`}
+                                                                />) : (
+                                                                    <input
+                                                                        type={field.type}
+                                                                        value={formData[field.name]}
+                                                                        onChange={(e) => handleInputChange(field.name, e.target.value)}
+                                                                        onBlur={() => handleValidation(field.name)}
+                                                                        style={{ minWidth: "20vw", borderRadius: "4px", border: "1px solid rgba(203, 202, 213, 1)", height: "44px", color: "#000000", fontSize: "16px", fontWeight: "400", outline: "none", paddingInline: "12px" }}
+                                                                        placeholder={`Enter your ${field.label.toLowerCase()}`}
+                                                                        className="custom-placeholder"
+                                                                    />
+                                                                )}
                                                     {errors[field.name] && (
                                                         <div className='text-red-500 my-2'>
                                                             {errors[field.name]}
@@ -470,8 +557,8 @@ const Form = () => {
                                 {currentStep < steps.length - 1 && (
                                     <button
                                         className={`w-40 h-219 py-4 px-4 mr-4 ml-2 flex text-center justify-center text-sm rounded font-normal ${!isFormValid
-                                                ? 'text-rgba-gray bg-gray-300 cursor-not-allowed' // Style for disabled state
-                                                : 'text-rgba-white button-rgba-blue' // Style for enabled state
+                                            ? 'text-rgba-gray bg-gray-300 cursor-not-allowed' // Style for disabled state
+                                            : 'text-rgba-white button-rgba-blue' // Style for enabled state
                                             }`}
                                         onClick={handleNext}
                                         disabled={!isFormValid} // Disable the button if the form is not valid

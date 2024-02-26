@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 After downloading or cloning the Repo, got to root of the project and hit:
 
-npm install
+    npm install
 
 Then, run the development server:
 
@@ -38,3 +38,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Project is hosted on Netlify, link to access hosted live demo :
+
+    https://leapadvance.netlify.app/
+
+For API Integration, I have used Axios 
+Other Implementations include - Material UI, API to fetch country, state and city, React components
+Main Techstack used are Next.js, React.js and Tailwind CSS

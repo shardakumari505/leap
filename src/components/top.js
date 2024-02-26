@@ -56,30 +56,33 @@ function Top() {
                     </div>
 
                     <div className='text-5xl font-bold text-rgba-white mt-10 mb-5 flex text-center md:text-left'>Masters in <br></br>Computer Science</div>
-                    <div className='flex my-2 '>
+                    <div className='flex my-2 items-center'>
                         <Image
                             src="/correct.png"
                             alt="Example Image"
                             width={30}
                             height={10}
+                            style={{height: "20px", width:"20px"}}
                         />
                         <div className='font-semibold text-lg text-rgba-white ml-3'>No IELTS or GRE* required</div>
                     </div>
-                    <div className='flex my-2 '>
+                    <div className='flex my-2 items-center'>
                         <Image
                             src="/correct.png"
                             alt="Example Image"
                             width={30}
                             height={10}
+                            style={{height: "20px", width:"20px"}}
                         />
                         <div className='font-semibold text-lg text-rgba-white ml-3'>3 year work Visa</div>
                     </div>
-                    <div className='flex my-2 '>
+                    <div className='flex my-2 items-center'>
                         <Image
                             src="/correct.png"
                             alt="Example Image"
                             width={30}
                             height={10}
+                            style={{height: "20px", width:"20px"}}
                         />
                         <div className='font-semibold text-lg text-rgba-white ml-3'>High admit chance with Leap</div>
                     </div>

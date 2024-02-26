@@ -201,7 +201,7 @@ const Form = () => {
         }
 
         if (currentStep === 1) {
-            const requiredFields = ['addressLine1', 'country', 'state', 'city', 'pinCode'];
+            const requiredFields = ['addressLine1', 'pinCode'];
 
             requiredFields.forEach((field) => {
                 if (!formData[field]) {
@@ -219,6 +219,34 @@ const Form = () => {
                 newErrors.addressLine2 = 'Incorrect Entry';
             }
 
+            if (fieldName === 'country') {
+                newErrors.country = !formData.country ? 'Required' : '';
+            }
+
+            if (fieldName === 'state') {
+                newErrors.state = !formData.state ? 'Required' : '';
+            }
+
+            if (fieldName === 'city') {
+                newErrors.city = !formData.city ? 'Required' : '';
+            }
+
+            const dropdownErrors = ['country', 'state', 'city'].map(field => {
+                const hasError = newErrors[field];
+                console.log(`Field: ${field}, Has Error: ${hasError}`);
+                return hasError;
+            });
+
+            if (dropdownErrors.includes(true)) {
+                setIsFormValid(false);
+                console.log(dropdownErrors);
+            } else {
+                setIsFormValid(Object.keys(newErrors).length === 0);
+            }
+
+            if (fieldName === 'country' || fieldName === 'state' || fieldName === 'city') {
+                newErrors[fieldName] = !formData[fieldName] ? 'Required' : '';
+            }
             const pinCodeRegex = /^[0-9]{6}$/;
 
             if (fieldName === 'pinCode' && !pinCodeRegex.test(formData.pinCode)) {
@@ -308,10 +336,11 @@ const Form = () => {
         setFormData((prevData) => ({
             ...prevData,
             [fieldName]: selectedValue,
-            state: '',  // Reset the state when the country changes
+            state: selectedValue,  // Reset the state when the country changes
             city: '',   // Reset the city when the country changes
         }));
         setStateOptions(selectedCountryData ? selectedCountryData.states : []);
+        handleValidation(fieldName);
     };
 
     useEffect(() => {
@@ -332,12 +361,13 @@ const Form = () => {
         }
     }, [selectedCountry, selectedState]);
 
-    const handleCityDropdownChange = (selectedOption) => {
+    const handleCityDropdownChange = (selectedOption, fieldName) => {
         const selectedValue = selectedOption.value;
         setFormData((prevData) => ({
             ...prevData,
             city: selectedValue,
         }));
+        handleValidation(fieldName);
     };
 
 
@@ -349,8 +379,8 @@ const Form = () => {
         { step: 1, label: 'Address Line 1', name: 'addressLine1', type: 'text' },
         { step: 1, label: 'Address Line 2', name: 'addressLine2', type: 'text' },
         { step: 1, label: 'Country', name: 'country', type: 'dropdown' },
-        { step: 1, label: 'State', name: 'state', type: 'dropdown' }, // Assuming state needs a date picker
-        { step: 1, label: 'City', name: 'city', type: 'dropdown' }, // Assuming city needs a date picker
+        { step: 1, label: 'State', name: 'state', type: 'dropdown' },
+        { step: 1, label: 'City', name: 'city', type: 'dropdown' },
         { step: 1, label: 'Pincode', name: 'pinCode', type: 'text' },
     ];
 
@@ -467,11 +497,12 @@ const Form = () => {
                                                     {field.name != 'addressLine2' ?
                                                         (<label className='text-base font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}<strong className='text-rgba-alert-red'>*</strong></label>) : (<label className='text-base font-semibold text-rgba-gray' style={{ paddingBottom: "6px" }}>{field.label}</label>)}
                                                     {field.name === 'state' ? (<Dropdown
-                                                        options={field.name === 'country' ? countryOptions : stateOptions}
+                                                        options={field.name === 'state' ? stateOptions : stateOptions}
                                                         onChange={(selectedOption) => handleDropdownChange(selectedOption, field.name)}
                                                         value={formData[field.name]}
-                                                        style={{ minWidth: "20vw", borderRadius: "4px", border: "1px solid rgba(203, 202, 213, 1)", height: "44px", color: "#000000", fontSize: "16px", fontWeight: "400", outline: "none", paddingInline: "12px" }}
                                                         placeholder={`Select ${field.label.toLowerCase()}`}
+                                                        onBlur={() => handleValidation(field.name)}
+                                                        className="custom-dropdown"
                                                     />) :
                                                         field.name === 'country' ?
                                                             (<Dropdown
@@ -479,6 +510,8 @@ const Form = () => {
                                                                 onChange={(selectedOption) => handleDropdownChange(selectedOption, field.name)}
                                                                 value={formData[field.name]}
                                                                 placeholder={`Select ${field.label.toLowerCase()}`}
+                                                                onBlur={() => handleValidation(field.name)}
+                                                                className="custom-dropdown"
                                                             />)
                                                             :
                                                             field.name === 'city' ?
@@ -487,6 +520,8 @@ const Form = () => {
                                                                     onChange={(selectedOption) => handleCityDropdownChange(selectedOption)}
                                                                     value={formData[field.name]}
                                                                     placeholder={`Select ${field.label.toLowerCase()}`}
+                                                                    onBlur={() => handleValidation(field.name)}
+                                                                    className="custom-dropdown"
                                                                 />) : (
                                                                     <input
                                                                         type={field.type}

@@ -100,13 +100,23 @@
 .navbar-box-shadow{
   box-shadow: 0 0 25px 5px #000;
 }
+/* styles.css */
+.custom-dropdown {
+  min-width: 20vw;
+  /* border-radius: "80px"; */
+  height: 44px;
+  outline: none;
+  /* padding-inline: 12px; */
+  border-radius: 20px;
+  margin: 0
+  /* border: 0.5px solid rgba(203, 202, 213, 1) */
 }
-
 .button-border-shadow{
   border: 1px solid #92B586;
   box-shadow : 1px 1px #92B586 inset;
 }
 
+}
 
 
 
